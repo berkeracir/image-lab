@@ -65,9 +65,11 @@ def readpaths(tracks):
     paths = []
     logger.debug("Reading {0} total tracks".format(len(tracks)))
 
-    for label, track, attributes in tracks:
+    # Reading descriptions of track objects
+    for label, track, attributes, description in tracks:
         path = Path()
         path.label = session.query(Label).get(label)
+        path.description = description
         
         logger.debug("Received a {0} track".format(path.label.text))
 
