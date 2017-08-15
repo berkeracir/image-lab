@@ -51,9 +51,9 @@ function instructions(job, h)
         h.append("<p>Once you have reached the end, you should rewind by pressing the rewind button (next to Play) and repeat this process for every object of interest. You are welcome to annotate multiple objects each playthrough.</p>");
     }
 
-    h.append("<img src='outsideoccluded.jpg' align='right'>");
+    h.append("<img src='outsideoccluded_1.jpg' align='right'>");
     h.append("<p>If an object leaves the screen, mark the <strong>Outside of view frame</strong> checkbox for the corresponding sidebar rectangle. Make sure you click the right button. When you mouse over the controls, the corresponding rectangle will light up in the view screen. Likewise, if the object you are tracking is still in the view frame but the view is obstructed (e.g., inside a car), mark the <strong>Occluded or obstructed</strong> checkbox. When the object becomes visible again, remember to uncheck these boxes. If there are additional checkboxes describing attributes, mark those boxes for the duration that it applies. For example, only mark \"Walking\" when the person is walking.</p>");
-
+    h.append("<p>Write a referring expression for each object. You can describe the objects with respect to the others stating their labels and ids.</p>");
     h.append("<p>If there are many objects on the screen, it can become difficult to select the right bounding box. By pressing the lock button <img src='lock.jpg'> on an object's sidebar rectangle, you can prevent changes to that track. Press the lock button again to renable modifications.</p>");
 
     h.append("<p>Remembering which box correspond to which box can be confusing. If you click on a box in the view screen, a tooltip will pop that will attempt to remind you of the box's identity.</p>");
