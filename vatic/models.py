@@ -189,6 +189,8 @@ class Path(turkic.database.Base):
     job = relationship(Job, backref = backref("paths", cascade="all,delete"))
     labelid = Column(Integer, ForeignKey(Label.id))
     label = relationship(Label, cascade = "none", backref = "paths")
+    # Added new column(description) to paths table
+    description = Column(String(500))
 
     interpolatecache = None
 
