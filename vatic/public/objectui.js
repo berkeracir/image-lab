@@ -408,6 +408,8 @@ function TrackObject(job, player, container, color)
     {
         this.details.append("<input type='checkbox' id='trackobject" + this.id + "lost'> <label for='trackobject" + this.id + "lost'>Outside of view frame</label><br>");
         this.details.append("<input type='checkbox' id='trackobject" + this.id + "occluded'> <label for='trackobject" + this.id + "occluded'>Occluded or obstructed</label><br>");
+        // added form fields for descriptions
+        this.details.append("<input type='text' id='" + this.id + "-" + this.label + "' value='' class='description'><br>");
 
         for (var i in this.job.attributes[this.track.label])
         {
