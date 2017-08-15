@@ -500,6 +500,14 @@ function ui_submit(job, tracks)
     
     function savejob(callback)
     {
+        // Assigning the input from description form fields to track objects
+        var list = []
+        var descriptions = document.getElementsByClassName('description');
+        for (i=descriptions.length-1; i>-1; i--)
+        {
+            tracks.tracks[descriptions.length-1-i].description=descriptions[i].value;
+        }
+
         server_post("savejob", [job.jobid],
             tracks.serialize(), function(data) {
                 callback()
