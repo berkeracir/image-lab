@@ -253,8 +253,10 @@ function ui_setupbuttons(job, player, tracks)
     });
 }
 
+//disabling keyboard shortcuts
 function ui_setupkeyboardshortcuts(job, player)
 {
+    /*
     $(window).keypress(function(e) {
         console.log("Key press: " + e.keyCode);
 
@@ -312,7 +314,7 @@ function ui_setupkeyboardshortcuts(job, player)
             }
         }
     });
-
+    */
 }
 
 function ui_canresize()
