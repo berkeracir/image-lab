@@ -440,6 +440,9 @@ function Track(player, color, position)
     this.locked = false;
     this.drawingnew = false;
 
+    // Added description for every track object
+    this.description = "";
+
     this.journal.mark(this.player.job.start,
         new Position(position.xtl, position.ytl,
                      position.xbr, position.ybr, 
@@ -920,7 +923,8 @@ function Track(player, color, position)
             str = str.substr(0, str.length - 1);
         }
 
-        return str += "}]";
+        // Added description to serialized form
+        return str += '},"' + this.description + '"]';
     }
 
     /*
