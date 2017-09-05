@@ -150,7 +150,7 @@ def detect_objects(image_np, sess, detection_graph, image_path,videoName):
 					ID = ID + 1
 
 				else:
-					for m in range(len(annotations)):        #yeni branche pushlayayım sonra merhe Check whether the object exists in previous frame or not by comparing w/ all objects in previous frame
+					for m in range(len(annotations)):        # Check whether the object exists in previous frame or not by comparing w/ all objects in previous frame
 						j = annotations[m]
 						className = category_index[sqClasses[i]]['name']
 						sameObject = cmpr(className,sqBox,j,im_width,im_height)
