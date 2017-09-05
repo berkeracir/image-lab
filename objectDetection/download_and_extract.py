@@ -35,8 +35,9 @@ def download_and_extract(model):
 	filepath = os.path.join(DEST_PATH, filename)
 	if not os.path.exists(filepath):
 		def download_progress(count, block_size, total_size):
-			sys.stdout.write("\r>> Downloading: %s | %.1f%%" % (filename,float(count*block_size)/float(total_size)*100))
+			sys.stdout.write("\r>> %.1f%%" % (float(count*block_size)/float(total_size)*100))
 			sys.stdout.flush()
+		sys.stdout.write(">> Downloading: %s \n" % (filename))
 		filepath, _ = urllib.request.urlretrieve(URL, filepath, download_progress)
 		print()
 		statinfo = os.stat(filepath)
