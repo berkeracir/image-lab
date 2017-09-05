@@ -8,7 +8,6 @@ def frame_extract(CURR_PATH):
 		captured_video = cv2.VideoCapture(os.path.join(path, i))
 		success, image = captured_video.read()
 		count = 0
-		success = True
 		directory = os.path.join(CURR_PATH, "frames", i.split('.')[0])
 		if not os.path.exists(directory):
 			os.makedirs(directory)	
