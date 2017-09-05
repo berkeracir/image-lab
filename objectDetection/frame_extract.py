@@ -13,6 +13,6 @@ def frame_extract(CURR_PATH):
 		if not os.path.exists(directory):
 			os.makedirs(directory)	
 		while success:
-			cv2.imwrite(directory + '/frame_%d.jpg' % count, image)
+			cv2.imwrite(directory + '/%d.jpg' % count, image)
 			success, image = captured_video.read()
 			count += 1
