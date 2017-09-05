@@ -36,10 +36,11 @@ def model_name(model):
 
 CURR_PATH = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 INPUT_DIR = os.path.join(CURR_PATH,"frames")
+annotation_dir = os.path.join(CURR_PATH,"annotations")
 
 
 # Choose the model: "mobilenet", "inception", "rfcn_resnet", "rcnn_resnet", "rcnn_inception"
-MODEL = "rcnn_inception"
+MODEL = "mobilenet"
 
 # Download and extract the model
 dae.download_and_extract(MODEL)
@@ -94,6 +95,7 @@ def cmpr(className,sqBox,annotation,im_width, im_height):
 def detect_objects(image_np, sess, detection_graph, image_path,videoName):
 	global annotations
 	global ID
+	global annotation_dir
 	new_annotations = []
 
 
@@ -120,7 +122,7 @@ def detect_objects(image_np, sess, detection_graph, image_path,videoName):
 	sqBoxes = np.squeeze(boxes)
 	sqScores = np.squeeze(scores)
 
-	if not os.path.exists(os.path.join(annotation_dir)):
+	if not os.path.exists(annotation_dir):
 		os.makedirs(annotation_dir)
 	if not os.path.exists(os.path.join(annotation_dir,videoName)):	
 		os.makedirs(os.path.join(annotation_dir,videoName))
@@ -148,7 +150,7 @@ def detect_objects(image_np, sess, detection_graph, image_path,videoName):
 					ID = ID + 1
 
 				else:
-					for m in range(len(annotations)):        # Check whether the object exists in previous frame or not by comparing w/ all objects in previous frame
+					for m in range(len(annotations)):        #yeni branche pushlayayım sonra merhe Check whether the object exists in previous frame or not by comparing w/ all objects in previous frame
 						j = annotations[m]
 						className = category_index[sqClasses[i]]['name']
 						sameObject = cmpr(className,sqBox,j,im_width,im_height)
