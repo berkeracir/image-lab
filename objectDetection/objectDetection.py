@@ -43,10 +43,10 @@ annotation_dir = os.path.join(CURR_PATH,"annotations")
 MODEL = "mobilenet"
 
 # Download and extract the model
-#dae.download_and_extract(MODEL)
+dae.download_and_extract(MODEL)
 
 # Extract the frames of the videos
-#fe.frame_extract(CURR_PATH)
+fe.frame_extract(CURR_PATH)
 
 MODEL_NAME = model_name(MODEL).split('.')[0]
 PATH_TO_CKPT = os.path.join(CURR_PATH,"data", MODEL_NAME, "frozen_inference_graph.pb") 
