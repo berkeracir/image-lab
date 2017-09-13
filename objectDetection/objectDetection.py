@@ -124,8 +124,6 @@ def detect_objects(image_np, sess, detection_graph, image_path,videoName):
 
 	if not os.path.exists(annotation_dir):
 		os.makedirs(annotation_dir)
-	if not os.path.exists(os.path.join(annotation_dir,videoName)):	
-		os.makedirs(os.path.join(annotation_dir,videoName))
 
 	for i in range(0,(sqBoxes).shape[0]):
 
@@ -137,7 +135,7 @@ def detect_objects(image_np, sess, detection_graph, image_path,videoName):
 
 				sqBox = sqBoxes[i]
 				annotation_dir = os.path.join(CURR_PATH,"annotations")
-				file = open(os.path.join(annotation_dir,videoName,"output.txt"),"a")
+				file = open(os.path.join(annotation_dir,videoName+".txt"),"a")
 				written = False
 				if annotations == []:                        # Add first frame's detected objects
 					file.write(str(ID) + ' ')
@@ -222,14 +220,15 @@ with detection_graph.as_default():
 				image_np = load_image_into_numpy_array(image)
 				image_process = detect_objects(image_np, sess, detection_graph,image_path,videoName)
 
-			f = open(os.path.join(CURR_PATH,"annotations",videoName,"output.txt"),"r")
-			lines = f.readlines()
-			f.close()
-			f = open(os.path.join(CURR_PATH,"annotations",videoName,"output.txt"),"w")
+			if (os.path.isfile(os.path.join(CURR_PATH,"annotations",videoName+".txt"))):
+				f = open(os.path.join(CURR_PATH,"annotations",videoName+".txt"),"r")
+				lines = f.readlines()
+				f.close()
+				f = open(os.path.join(CURR_PATH,"annotations",videoName+".txt"),"w")
 
-			for i in range(ID):	
-				for line in lines:
-				  if line.split(' ')[0] == str(i):
-				    f.write(line)
-			f.close()
+				for i in range(ID):
+					for line in lines:
+						if line.split(' ')[0] == str(i):
+						  f.write(line)
+				f.close()
 
