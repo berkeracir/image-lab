@@ -58,13 +58,6 @@ label_map = label_map_util.load_labelmap("/path/to/tensorflow/models/object_dete
 categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=NUM_CLASSES, use_display_name=True)
 category_index = label_map_util.create_category_index(categories)
 
-# ID number of the objects
-ID = 0
-
-# annotations from prev frame
-annotations = []
-
-
 # cmpr function takes the necessary arguments of a previous object and compares with the new detected object
 # to decide if they are the same or not
 
@@ -210,7 +203,8 @@ with detection_graph.as_default():
 	with tf.Session(graph=detection_graph) as sess:
 		dirs = os.listdir(INPUT_DIR)
 		for FRAME_DIR in dirs:
-			ID = 0
+			annotations = [] # annotations from prev frame
+			ID = 0 # number of the objects
 			videoName = FRAME_DIR
 			l = len([file for file in os.listdir(os.path.join(INPUT_DIR,FRAME_DIR))])
 			FRAME_PATHS = [os.path.join(INPUT_DIR, FRAME_DIR, "{}.jpg".format(i)) for i in range(0,l)]
