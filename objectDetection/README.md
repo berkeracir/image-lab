@@ -14,5 +14,5 @@
 
 4. Add Libraries to PYTONPATH, this command needs to run from every new terminal you start:
 `export PYTHONPATH=$PYTHONPATH:/path/to/tensorflow/models/`
-5. Run objectDetection.py
+5. Run objectDetection.py.
 6. Annotations of each video will be in `../objectDetection/annotations/` with the name of video.
