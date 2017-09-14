@@ -1,19 +1,5 @@
 # Object Detection with Google Tensorflow Object Detection API and Annotation
 
-1. Follow the installation process on https://github.com/tensorflow/models/blob/master/object_detection/g3doc/installation.md
-   until Protobuf Compilation(included).
-
-2. Check where the tensorflow packages are used and adapt the paths in "ObjectDetection.py" file to your tensorflow directory.
-
-3. Again adapting the path to your tensorflow directory, run "export PYTHONPATH=$PYTHONPATH:/path/to/tensorflow/models/" on terminal,
-   in the directory where you will run the object detector.
-
-4. Run objectDetection.py.
-
-The annotations of each video will be in "annotations" folder separated video by video.
-
-# Object Detection with Google Tensorflow Object Detection API and Annotation
-
 1. Follow the installation process on [link](https://github.com/tensorflow/models/blob/master/object_detection/g3doc/installation.md) until Protobuf Compilation(included).
 
 2. Check where the tensorflow packages are installed and adapt the path in "objectDetection.py", line 57 (`label_map = label_map_util.load_labelmap("/*path*/*to*/tensorflow/models/object_detection/data/mscoco_label_map.pbtxt")`) to your tensorflow directory.
