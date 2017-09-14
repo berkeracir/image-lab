@@ -12,7 +12,8 @@
  * Faster RCNN with Inception Resnet v2.
 
 More information about speed/accuracy trade-offs for modern convolutional object detectors can be found [here](https://arxiv.org/pdf/1611.10012v3.pdf).
-Default model is *Single Shot Multibox Detector (SSD) with MobileNet*, it can be changed in "objectDetection.py", line 42-43.
+
+Note: Default model is *Single Shot Multibox Detector (SSD) with MobileNet*, it can be changed in "objectDetection.py", line 42-43.
 
 4. Add Libraries to PYTONPATH, this command needs to run from every new terminal you start:
 `export PYTHONPATH=$PYTHONPATH:/path/to/tensorflow/models/`
