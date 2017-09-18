@@ -54,7 +54,7 @@ PATH_TO_LABELS = os.path.join(CURR_PATH, "data", MODEL_NAME, "graph.pbtxt")
 
 NUM_CLASSES = 90
 
-label_map = label_map_util.load_labelmap("/path/to/tensorflow/models/object_detection/data/mscoco_label_map.pbtxt")
+label_map = label_map_util.load_labelmap("/home/vermithrax/tensorflow/models/object_detection/data/mscoco_label_map.pbtxt")
 categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=NUM_CLASSES, use_display_name=True)
 category_index = label_map_util.create_category_index(categories)
 
@@ -223,6 +223,6 @@ with detection_graph.as_default():
 				for i in range(ID):
 					for line in lines:
 						if line.split(' ')[0] == str(i):
-						  f.write(line)
+							f.write(line)
 				f.close()
 
