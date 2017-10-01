@@ -3,14 +3,10 @@
 
 import os
 import inspect
-import time
-import argparse
-import multiprocessing
 import numpy as np
 import tensorflow as tf
 import math
 import copy
-from matplotlib import pyplot as plt
 
 from PIL import Image
 import download_and_extract as dae
@@ -54,7 +50,7 @@ PATH_TO_LABELS = os.path.join(CURR_PATH, "data", MODEL_NAME, "graph.pbtxt")
 
 NUM_CLASSES = 90
 
-label_map = label_map_util.load_labelmap("/home/vermithrax/tensorflow/models/object_detection/data/mscoco_label_map.pbtxt")
+label_map = label_map_util.load_labelmap("/path/to/tensorflow/models/object_detection/data/mscoco_label_map.pbtxt")
 categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=NUM_CLASSES, use_display_name=True)
 category_index = label_map_util.create_category_index(categories)
 
