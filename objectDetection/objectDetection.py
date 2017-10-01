@@ -3,14 +3,10 @@
 
 import os
 import inspect
-import time
-import argparse
-import multiprocessing
 import numpy as np
 import tensorflow as tf
 import math
 import copy
-from matplotlib import pyplot as plt
 
 from PIL import Image
 import download_and_extract as dae
@@ -57,13 +53,6 @@ NUM_CLASSES = 90
 label_map = label_map_util.load_labelmap("/path/to/tensorflow/models/object_detection/data/mscoco_label_map.pbtxt")
 categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=NUM_CLASSES, use_display_name=True)
 category_index = label_map_util.create_category_index(categories)
-
-# ID number of the objects
-ID = 0
-
-# annotations from prev frame
-annotations = []
-
 
 # cmpr function takes the necessary arguments of a previous object and compares with the new detected object
 # to decide if they are the same or not
@@ -124,8 +113,6 @@ def detect_objects(image_np, sess, detection_graph, image_path,videoName):
 
 	if not os.path.exists(annotation_dir):
 		os.makedirs(annotation_dir)
-	if not os.path.exists(os.path.join(annotation_dir,videoName)):	
-		os.makedirs(os.path.join(annotation_dir,videoName))
 
 	for i in range(0,(sqBoxes).shape[0]):
 
@@ -137,7 +124,7 @@ def detect_objects(image_np, sess, detection_graph, image_path,videoName):
 
 				sqBox = sqBoxes[i]
 				annotation_dir = os.path.join(CURR_PATH,"annotations")
-				file = open(os.path.join(annotation_dir,videoName,"output.txt"),"a")
+				file = open(os.path.join(annotation_dir,videoName+".txt"),"a")
 				written = False
 				if annotations == []:                        # Add first frame's detected objects
 					file.write(str(ID) + ' ')
@@ -212,7 +199,8 @@ with detection_graph.as_default():
 	with tf.Session(graph=detection_graph) as sess:
 		dirs = os.listdir(INPUT_DIR)
 		for FRAME_DIR in dirs:
-			ID = 0
+			annotations = [] # annotations from prev frame
+			ID = 0 # number of the objects
 			videoName = FRAME_DIR
 			l = len([file for file in os.listdir(os.path.join(INPUT_DIR,FRAME_DIR))])
 			FRAME_PATHS = [os.path.join(INPUT_DIR, FRAME_DIR, "{}.jpg".format(i)) for i in range(0,l)]
@@ -222,14 +210,15 @@ with detection_graph.as_default():
 				image_np = load_image_into_numpy_array(image)
 				image_process = detect_objects(image_np, sess, detection_graph,image_path,videoName)
 
-			f = open(os.path.join(CURR_PATH,"annotations",videoName,"output.txt"),"r")
-			lines = f.readlines()
-			f.close()
-			f = open(os.path.join(CURR_PATH,"annotations",videoName,"output.txt"),"w")
+			if (os.path.isfile(os.path.join(CURR_PATH,"annotations",videoName+".txt"))):
+				f = open(os.path.join(CURR_PATH,"annotations",videoName+".txt"),"r")
+				lines = f.readlines()
+				f.close()
+				f = open(os.path.join(CURR_PATH,"annotations",videoName+".txt"),"w")
 
-			for i in range(ID):	
-				for line in lines:
-				  if line.split(' ')[0] == str(i):
-				    f.write(line)
-			f.close()
+				for i in range(ID):
+					for line in lines:
+						if line.split(' ')[0] == str(i):
+							f.write(line)
+				f.close()
 
