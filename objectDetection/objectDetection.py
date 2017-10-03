@@ -66,16 +66,20 @@ def cmpr(className,sqBox,annotation,im_width, im_height):
 		x_margin = math.ceil(math.log(annotation[3]-annotation[1]))
 		y_margin = math.ceil(math.log(annotation[4]-annotation[2]))
 
-		if abs(int(sqBox[1]*im_width) - annotation[1]) > x_margin and abs(int(sqBox[0]*im_height) - annotation[2]) > y_margin and abs(int(sqBox[3]*im_width) - annotation[3]) > x_margin:
+		if (abs(int(sqBox[1]*im_width) - annotation[1]) > x_margin and abs(int(sqBox[0]*im_height) - annotation[2]) > y_margin 
+				and abs(int(sqBox[3]*im_width) - annotation[3]) > x_margin):
 			return False
 
-		elif abs(int(sqBox[1]*im_width) - annotation[1]) > x_margin and abs(int(sqBox[0]*im_height) - annotation[2]) > y_margin and abs(int(sqBox[2]*im_height) - annotation[4]) > y_margin:
+		elif (abs(int(sqBox[1]*im_width) - annotation[1]) > x_margin and abs(int(sqBox[0]*im_height) - annotation[2]) > y_margin 
+				and abs(int(sqBox[2]*im_height) - annotation[4]) > y_margin):
 			return False
 
-		elif abs(int(sqBox[1]*im_width) - annotation[1]) > x_margin and abs(int(sqBox[2]*im_height) - annotation[4]) > y_margin and abs(int(sqBox[3]*im_width) - annotation[3]) > x_margin:
+		elif (abs(int(sqBox[1]*im_width) - annotation[1]) > x_margin and abs(int(sqBox[2]*im_height) - annotation[4]) > y_margin 
+				and abs(int(sqBox[3]*im_width) - annotation[3]) > x_margin):
 			return False
 
-		elif abs(int(sqBox[2]*im_height) - annotation[4]) > y_margin and abs(int(sqBox[0]*im_height) - annotation[2]) > y_margin and abs(int(sqBox[3]*im_width) - annotation[3]) > x_margin:
+		elif (abs(int(sqBox[2]*im_height) - annotation[4]) > y_margin and abs(int(sqBox[0]*im_height) - annotation[2]) > y_margin 
+				and abs(int(sqBox[3]*im_width) - annotation[3]) > x_margin):
 			return False
 
 		else:
@@ -95,7 +99,8 @@ def detect_objects(image_np, sess, detection_graph, image_path,videoName):
 	classes = detection_graph.get_tensor_by_name("detection_classes:0")
 	num_detections = detection_graph.get_tensor_by_name("num_detections:0")
 
-	(boxes, scores, classes, num_detections) = sess.run([boxes, scores, classes, num_detections], feed_dict={image_tensor:image_np_expanded})
+	(boxes, scores, classes, num_detections) = sess.run([boxes, scores, classes, num_detections], 
+		feed_dict={image_tensor:image_np_expanded})
 
 	vis_util.visualize_boxes_and_labels_on_image_array(image_np, np.squeeze(boxes),
 		np.squeeze(classes).astype(np.int32),    
@@ -137,7 +142,8 @@ def detect_objects(image_np, sess, detection_graph, image_path,videoName):
 					ID = ID + 1
 
 				else:
-					for m in range(len(annotations)):        # Check whether the object exists in previous frame or not by comparing w/ all objects in previous frame
+					for m in range(len(annotations)):        
+					# Check whether the object exists in previous frame or not by comparing w/ all objects in previous frame
 						j = annotations[m]
 						className = category_index[sqClasses[i]]['name']
 						sameObject = cmpr(className,sqBox,j,im_width,im_height)
